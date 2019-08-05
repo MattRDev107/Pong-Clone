@@ -18,9 +18,23 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         if(playerSelected != PlayerSelection.AIPlayer) {
-            PlayerMovement();
+            PlayerMovement(PlayerSelectionToNum(this.playerSelected));
         }else if (playerSelected == PlayerSelection.AIPlayer) {
             AIMovement();
         }
+    }
+
+    private void PlayerMovement(int playerNum) {
+        float moveY = Input.GetAxis("Vertical"+ playerNum);
+        rb.velocity = new Vector2(0, moveY * speed);
+    }
+
+    private void AIMovement() {
+
+    }
+
+    private int PlayerSelectionToNum(PlayerSelection playerSelected) {
+        int playerNum = (int)playerSelected;
+        return playerNum++;
     }
 }
