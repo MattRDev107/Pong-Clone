@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 10.0f;
-    public enum PlayerSelection { PlayerOne, PlayerTwo, AIPlayer };
+    public enum PlayerSelection { PlayerOne, PlayerTwo, AI};
     public PlayerSelection playerSelected;
 
     private Rigidbody2D rb;
@@ -13,13 +13,13 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
-        ball = GameObject.FindGameObjectWithTag("ball");
+        ball = GameObject.FindGameObjectWithTag("Ball");
     }
 
     private void Update() {
-        if(playerSelected != PlayerSelection.AIPlayer) {
-            PlayerMovement(PlayerSelectionToNum(this.playerSelected));
-        }else if (playerSelected == PlayerSelection.AIPlayer) {
+        if(playerSelected != PlayerSelection.AI) {
+            PlayerMovement(PlayerSelectionToInt(this.playerSelected));
+        }else if (playerSelected == PlayerSelection.AI) {
             AIMovement();
         }
     }
@@ -33,8 +33,9 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    private int PlayerSelectionToNum(PlayerSelection playerSelected) {
-        int playerNum = (int)playerSelected;
-        return playerNum++;
+    private int PlayerSelectionToInt(PlayerSelection playerSelect) {
+        int playerNum = (int)playerSelect;
+        playerNum++;
+        return playerNum;
     }
 }
